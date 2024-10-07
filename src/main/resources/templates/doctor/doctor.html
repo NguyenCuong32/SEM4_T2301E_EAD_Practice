@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Subject</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+          integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+          crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+          integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+          crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+          integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+          crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<header>
+  <div th:replace="~{fragments/header :: header}"></div>
+</header>
+<h1>Get all Doctors</h1>
+<div>
+  <form th:action="@{/doctors/add}" method="post" th:object="${doctor}">
+    <div class="form-group">
+      <label for="add-fullName">Full Name</label>
+      <input type="text" id="add-fullName" name="fullName" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="add-specialization">Specialization</label>
+      <input type="text" id="add-specialization" name="specialization" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="add-phoneNumber">Last Name</label>
+      <input type="number" id="add-phoneNumber" name="phoneNumber" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="add-email">Email</label>
+      <input type="text" id="add-email" name="email" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="add-yearsOfExperience">Years Of Experience</label>
+      <input type="number" id="add-yearsOfExperience" name="yearsOfExperience" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-success">Add</button>
+    <button class="btn btn-success">Cancel</button>
+  </form>
+</div>
+<table class="table">
+  <thead>
+  <th>ID</th>
+  <th>Full Name</th>
+  <th>Specialization</th>
+  <th>Phone Number</th>
+  <th>Email</th>
+  <th>Years Of Experience</th>
+  <th>Action</th>
+  </thead>
+  <tbody>
+  <tr th:each="doctor:${doctors}">
+    <td th:text="${doctor.getDoctor_id()}"></td>
+    <td th:text="${doctor.getFullName()}"></td>
+    <td th:text="${doctor.getSpecialization()}"></td>
+    <td th:text="${doctor.getPhoneNumber()}"></td>
+    <td th:text="${doctor.getEmail()}"></td>
+    <td th:text="${doctor.getYearsOfExperience()}"></td>
+    <td>
+      <div>
+        <a class="btn btn-secondary" th:href="@{/doctors/update/{id}(id=${doctor.getDoctor_id()})}">Edit</a>
+        <form th:action="@{/doctors/delete/{id}(id=${doctor.getDoctor_id()})}" method="post">
+          <input type ="hidden" name="_method" value="delete" />
+          <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this doctor?')">Delete</button>
+        </form>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
