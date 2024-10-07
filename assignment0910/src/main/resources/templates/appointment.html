@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Manage Appointments</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .btn-custom {
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            margin: 0.2rem;
+        }
+
+        .container {
+            margin-top: 5%;
+        }
+
+        h2 {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        table {
+            margin-top: 2rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, #007bff, #0056b3);
+            border: none;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(to right, #0056b3, #007bff);
+        }
+
+        .btn-warning, .btn-danger {
+            transition: background 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 class="mt-4">Manage Appointments</h2>
+
+    <a class="btn btn-primary btn-custom" th:href="@{/api/appointments/add}">+ Add Appointment</a>
+
+    <table class="table table-bordered mt-4">
+        <thead>
+        <tr>
+            <th>Patient</th>
+            <th>Doctor</th>
+            <th>Date</th>
+            <th>Reason</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="appointment : ${appointments}">
+            <td th:text="${appointment.patient.full_name}"></td>
+            <td th:text="${appointment.doctor.full_name}"></td>
+            <td th:text="${appointment.date}"></td>
+            <td th:text="${appointment.reason}"></td>
+            <td th:text="${appointment.status}"></td>
+            <td>
+                <a class="btn btn-warning btn-custom" th:href="@{/api/appointments/edit/{id}(id=${appointment.id})}">Edit</a>
+                <form th:action="@{/api/appointments/delete/{id}(id=${appointment.id})}" method="post" style="display:inline;">
+                    <input type="hidden" name="_method" value="DELETE"/>
+                    <button type="submit" class="btn btn-danger btn-custom">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
