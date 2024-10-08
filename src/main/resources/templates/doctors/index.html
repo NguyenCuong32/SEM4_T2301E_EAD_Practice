@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Doctors List</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1>Doctors List</h1>
+      <a th:href="@{/doctors/new}" class="btn btn-primary mb-3"
+        >Add New Doctor</a
+      >
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Specialization</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Experience</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="doctor : ${doctors}">
+            <td th:text="${doctor.doctorId}"></td>
+            <td th:text="${doctor.fullName}"></td>
+            <td th:text="${doctor.specialization}"></td>
+            <td th:text="${doctor.phoneNumber}"></td>
+            <td th:text="${doctor.email}"></td>
+            <td th:text="${doctor.yearsOfExperience}"></td>
+            <td>
+              <a
+                th:href="@{/doctors/edit/{id}(id=${doctor.doctorId})}"
+                class="btn btn-info btn-sm"
+                >Edit</a
+              >
+              <a
+                th:href="@{/doctors/delete/{id}(id=${doctor.doctorId})}"
+                class="btn btn-danger btn-sm"
+                >Delete</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

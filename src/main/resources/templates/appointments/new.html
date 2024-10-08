@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Add New Appointment</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1>Add New Appointment</h1>
+      <form
+        th:action="@{/appointments}"
+        th:object="${appointment}"
+        method="post"
+      >
+        <div class="form-group">
+          <label>Patient</label>
+          <select th:field="*{patient.patientId}" class="form-control">
+            <option
+              th:each="patient : ${patients}"
+              th:value="${patient.patientId}"
+              th:text="${patient.fullName}"
+            ></option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Doctor</label>
+          <select th:field="*{doctor.doctorId}" class="form-control">
+            <option
+              th:each="doctor : ${doctors}"
+              th:value="${doctor.doctorId}"
+              th:text="${doctor.fullName}"
+            ></option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Appointment Date</label>
+          <input
+            type="datetime-local"
+            th:field="*{appointmentDate}"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label>Status</label>
+          <input type="text" th:field="*{status}" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
+      </form>
+    </div>
+  </body>
+</html>

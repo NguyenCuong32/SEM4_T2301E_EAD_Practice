@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Home</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container mt-5 text-center">
+      <h1>Welcome to the Hospital Management System</h1>
+      <p>Select a section to manage:</p>
+      <div class="mt-4">
+        <a th:href="@{/doctors}" class="btn btn-primary btn-lg mx-2"
+          >Manage Doctors</a
+        >
+        <a th:href="@{/patients}" class="btn btn-primary btn-lg mx-2"
+          >Manage Patients</a
+        >
+        <a th:href="@{/appointments}" class="btn btn-primary btn-lg mx-2"
+          >Manage Appointments</a
+        >
+      </div>
+    </div>
+  </body>
+</html>

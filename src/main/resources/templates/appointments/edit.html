@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Edit Appointment</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1>Edit Appointment</h1>
+      <form
+        th:action="@{/appointments/update/{id}(id=${appointment.appointmentId})}"
+        th:object="${appointment}"
+        method="post"
+      >
+        <div class="form-group">
+          <label>Patient</label>
+          <select th:field="*{patient}" class="form-control">
+            <option
+              th:each="patient : ${patients}"
+              th:value="${patient}"
+              th:text="${patient.fullName}"
+            ></option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Doctor</label>
+          <select th:field="*{doctor}" class="form-control">
+            <option
+              th:each="doctor : ${doctors}"
+              th:value="${doctor}"
+              th:text="${doctor.fullName}"
+            ></option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Appointment Date</label>
+          <input
+            type="datetime-local"
+            th:field="*{appointmentDate}"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label>Status</label>
+          <input type="text" th:field="*{status}" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-success">Update</button>
+        <a th:href="@{/appointments}" class="btn btn-secondary">Back</a>
+      </form>
+    </div>
+  </body>
+</html>
