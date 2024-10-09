@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 10px;
+            text-align: center;
+            text-decoration: none;
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<h1 th:text="${doctor.doctorId} == null ? 'Add New Doctor' : 'Edit Doctor'"></h1>
+<form th:action="@{${doctor.doctorId} == null ? '/doctors' : '/doctors/update/' + ${doctor.doctorId}}" method="post">
+    <label for="fullName">Full Name:</label>
+    <input type="text" id="fullName" name="fullName" th:value="${doctor.fullName}" required/>
+
+    <label for="specialization">Specialization:</label>
+    <input type="text" id="specialization" name="specialization" th:value="${doctor.specialization}" required/>
+
+    <label for="phoneNumber">Phone Number:</label>
+    <input type="text" id="phoneNumber" name="phoneNumber" th:value="${doctor.phoneNumber}" required/>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" th:value="${doctor.email}" required/>
+
+    <label for="yearsOfExperience">Years of Experience:</label>
+    <input type="number" id="yearsOfExperience" name="yearsOfExperience" th:value="${doctor.yearsOfExperience}"/>
+
+    <button type="submit">Submit</button>
+    <a href="/doctors">Cancel</a>
+</form>
+</body>
+</html>
