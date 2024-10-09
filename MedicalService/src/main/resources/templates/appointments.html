@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Appointments</title>
+</head>
+<body>
+<h1>Appointments</h1>
+<form action="#" th:action="@{/appointments}" method="post">
+    <label for="patient">Patient:</label>
+    <select name="patient" id="patient" required>
+        <option th:each="patient : ${patients}"
+                th:value="${patient.patientId}"
+                th:text="${patient.fullName}"></option>
+    </select>
+
+    <label for="doctor">Doctor:</label>
+    <select name="doctor" id="doctor" required>
+        <option th:each="doctor : ${doctors}"
+                th:value="${doctor.doctorId}"
+                th:text="${doctor.fullName}"></option>
+    </select>
+
+    <label for="appointmentDate">Appointment Date:</label>
+    <input type="datetime-local" name="appointmentDate" required />
+
+    <label for="reason">Reason:</label>
+    <input type="text" name="reason" />
+
+    <button type="submit">Add Appointment</button>
+</form>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Patient</th>
+        <th>Doctor</th>
+        <th>Appointment Date</th>
+        <th>Reason</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="appointment : ${appointments}">
+        <td th:text="${appointment.appointmentId}"></td>
+        <td th:text="${appointment.patient.fullName}"></td>
+        <td th:text="${appointment.doctor.fullName}"></td>
+        <td th:text="${#dates.format(appointment.appointmentDate, 'yyyy-MM-dd HH:mm')}"></td>
+        <td th:text="${appointment.reason}"></td>
+        <td th:text="${appointment.status}"></td>
+        <td>
+            <a th:href="@{/appointments/delete/{id}(id=${appointment.appointmentId})}">Delete</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
