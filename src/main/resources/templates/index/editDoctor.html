@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Doctor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="text-center">Edit Doctor</h2>
+
+    <!-- Form to Edit Doctor -->
+    <form th:action="@{/api/v1/doctor/update}" method="post" th:object="${doctorDTO}">
+        <input type="hidden" th:field="*{id}" />
+
+        <!-- Doctor Name -->
+        <div class="mb-3">
+            <label for="fullName" class="form-label">Doctor Name</label>
+            <input type="text" class="form-control" id="fullName" th:field="*{fullName}" required>
+        </div>
+
+        <!-- Specialization -->
+        <div class="mb-3">
+            <label for="specialization" class="form-label">Specialization</label>
+            <input type="text" class="form-control" id="specialization" th:field="*{specialization}" required>
+        </div>
+
+        <!-- Phone Number -->
+        <div class="mb-3">
+            <label for="phoneNumber" class="form-label">Phone Number</label>
+            <input type="text" class="form-control" id="phoneNumber" th:field="*{phoneNumber}" required>
+        </div>
+
+        <!-- Email -->
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" th:field="*{email}" required>
+        </div>
+
+        <!-- Year of Experience -->
+        <div class="mb-3">
+            <label for="yoe" class="form-label">Year of Experience</label>
+            <input type="text" class="form-control" id="yoe" th:field="*{yoe}" required>
+        </div>
+
+        <!-- Update Button -->
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="/your-back-url" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
